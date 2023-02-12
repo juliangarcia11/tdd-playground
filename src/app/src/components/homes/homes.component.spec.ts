@@ -20,4 +20,11 @@ describe('HomesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show homes', () => {
+
+    const item = fixture.nativeElement.querySelectorAll('[data-test="home"]');
+    expect(item.length).toBe(3);
+
+  });
 });
