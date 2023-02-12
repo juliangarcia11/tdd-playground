@@ -15,15 +15,15 @@ export class HomesComponent {
     this.homes$ = of([
       {
         title: 'Home 1',
-        image: 'image 1',
+        image: './favicon.ico',
         location: 'new york'
       },{
         title: 'Home 2',
-        image: 'image 2',
+        image: './favicon.ico',
         location: 'boston'
       },{
         title: 'Home 3',
-        image: 'image 3',
+        image: './favicon.ico',
         location: 'chicago'
       },
     ])

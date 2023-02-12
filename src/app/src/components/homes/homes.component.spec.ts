@@ -27,4 +27,13 @@ describe('HomesComponent', () => {
     expect(item.length).toBe(3);
 
   });
+
+  it('should show home info', () => {
+
+    const item = fixture.nativeElement.querySelector('[data-test="home"]');
+    expect(item.querySelector('[data-test="title"]').innerText).toBe('Home 1');
+    expect(item.querySelector('[data-test="location"]').innerText).toBe('new york');
+    expect(item.querySelector('[data-test="image"]')).toBeTruthy();
+
+  });
 });
