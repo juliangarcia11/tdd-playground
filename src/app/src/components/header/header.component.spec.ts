@@ -17,7 +17,28 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create header component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show logo', () => {
+
+    const item = fixture.nativeElement.querySelector('[data-test="logo"]');
+    expect(item).toBeTruthy();
+
+  });
+
+  it('should show search', () => {
+
+    const item = fixture.nativeElement.querySelector('[data-test="search"]');
+    expect(item).toBeTruthy();
+
+  });
+
+  it('should show menu', () => {
+
+    const item = fixture.nativeElement.querySelector('[data-test="menu"]');
+    expect(item).toBeTruthy();
+
   });
 });
