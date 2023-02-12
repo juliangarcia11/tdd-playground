@@ -1,15 +1,22 @@
 // style the app-header header elm
 :host header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-color: mediumpurple;
   padding: 5px;
 }
 
+.header-row {
+  display: flex;
+  flex-direction: row;
+  min-width: 100%;
+  justify-content: space-between;
+}
+
 // style the app headeer .header-left div
-:host header .header-left {
+.header-left {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -17,11 +24,11 @@
 }
 
 // add left margins to .header-left divs except for the first one
-:host header .header-left div:not(:first-child) {
+.header-left div:not(:first-child) {
   margin-left: 10px;
 }
 
 // add left margins to .header-menu buttons except for the first one
-:host header .header-menu button:not(:first-child) {
+.header-menu button:not(:first-child) {
   margin-left: 5px;
 }

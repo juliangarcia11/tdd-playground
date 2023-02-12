@@ -41,4 +41,12 @@ describe('HeaderComponent', () => {
     expect(item).toBeTruthy();
 
   });
+
+  it('should show filters', () => {
+    const filterSelectors = ['home-type', 'dates', 'guests', 'price', 'rooms', 'amenities'];
+    filterSelectors.forEach(filter => {
+      const item = fixture.nativeElement.querySelector(`[data-test="${filter}"]`);
+      expect(item).toBeTruthy();
+    });
+  });
 });
