@@ -6,17 +6,20 @@ import {of} from "rxjs";
 import { HomesComponent } from './homes.component';
 import {DataService} from "../../services/data.service";
 import {MockedHomes} from "../../models/homes.mock";
+import {DialogService} from "../../services/dialog.service";
 
 describe('HomesComponent', () => {
   let component: HomesComponent;
   let fixture: ComponentFixture<HomesComponent>;
   let dataService: jasmine.SpyObj<DataService>;
+  let dialogService: jasmine.SpyObj<DialogService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HomesComponent ],
       providers: [
-        {provide: DataService, useFactory: () => spyOnClass(DataService)}
+        {provide: DataService, useFactory: () => spyOnClass(DataService)},
+        {provide: DialogService, useFactory: () => spyOnClass(DialogService)},
       ]
     })
     .compileComponents();
@@ -27,6 +30,7 @@ describe('HomesComponent', () => {
 
   // before each test, get the data service and mock a return of data from the service
   beforeEach(() => {
+    dialogService = TestBed.get(DialogService);
     dataService = TestBed.get(DataService);
     dataService.getHomes$.and.returnValue(of(MockedHomes));
 
@@ -58,5 +62,17 @@ describe('HomesComponent', () => {
     const item = fixture.nativeElement.querySelector('[data-test="home"]');
     expect(item.querySelector('[data-test="book-btn"]')).toBeTruthy();
 
+  });
+
+  it('should use dialog service to open a dialog when clicking on the booking button', () => {
+
+    // Grab the button to click
+    const bookBtn = fixture.nativeElement.querySelector('[data-test="book-btn"] button');
+
+    // Click the button
+    bookBtn.click();
+
+    // Assert that the dialog service was used to open a dialog
+    expect(dialogService.open).toHaveBeenCalled();
   });
 });

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {DataService} from "../../services/data.service";
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
   selector: 'app-homes',
@@ -12,26 +13,19 @@ export class HomesComponent implements OnInit {
   homes$: Observable<any> | undefined;
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private dialogService: DialogService,
   ) {
   }
 
   ngOnInit() {
     this.homes$ = this.dataService.getHomes$();
-    // this.homes$ = of([
-    //   {
-    //     title: 'Home 1',
-    //     image: './favicon.ico',
-    //     location: 'new york'
-    //   },{
-    //     title: 'Home 2',
-    //     image: './favicon.ico',
-    //     location: 'boston'
-    //   },{
-    //     title: 'Home 3',
-    //     image: './favicon.ico',
-    //     location: 'chicago'
-    //   },
-    // ])
+  }
+
+  /**
+   * Ask the DialogService to open the Booking Dialog
+   */
+  openDialog() {
+    this.dialogService.open();
   }
 }
