@@ -2,16 +2,19 @@
   {
     "title": "Home 1",
     "image": "assets/cabin.jpg",
-    "location": "new york"
+    "location": "new york",
+    "price_nightly": 125
   },
   {
     "title": "Home 2",
     "image": "assets/cabin.jpg",
-    "location": "boston"
+    "location": "boston",
+    "price_nightly":  100
   },
   {
     "title": "Home 3",
     "image": "assets/cabin.jpg",
-    "location": "chicago"
+    "location": "chicago",
+    "price_nightly":  105
   }
 ]
