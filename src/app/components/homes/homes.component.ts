@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {DataService} from "../../services/data.service";
 import {DialogService} from "../../services/dialog.service";
+import {BookingComponent} from "../booking/booking.component";
 
 @Component({
   selector: 'app-homes',
@@ -26,6 +27,9 @@ export class HomesComponent implements OnInit {
    * Ask the DialogService to open the Booking Dialog
    */
   openDialog() {
-    this.dialogService.open();
+    this.dialogService.open(BookingComponent, {
+      width: '40%',
+      data: {}
+    });
   }
 }

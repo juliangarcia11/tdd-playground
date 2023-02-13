@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {ComponentType} from "@angular/cdk/overlay";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   /**
    * TODO
    *  Stub function
    */
-  open(): Observable<any> {
+  open(dialogComponent: ComponentType<unknown>, data: {}): void {
     console.log('DIALOG SERVICE OPEN');
-    return of();
+    const dialogRef = this.dialog.open(dialogComponent, data);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
