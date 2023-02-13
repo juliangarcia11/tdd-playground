@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Observable, of, tap} from "rxjs";
+import {map, Observable, of, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {HomeModel} from "../models/home.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,13 @@ export class DataService {
     private httpClient: HttpClient
   ) { }
 
-  getHomes$(): Observable<any> {
-
-    return this.httpClient.get<any>('assets/homes.json').pipe(tap(r => console.log('tapped assets', r)));
+  /**
+   * Get the homes.json file data
+   * @returns Observable<HomeModel[]>
+   */
+  getHomes$(): Observable<HomeModel[]> {
+    return this.httpClient.get<any>('assets/homes.json').pipe(
+      map((homes: any[]) => homes.map(h => new HomeModel(h)))
+    );
   }
 }

@@ -3,6 +3,7 @@ import {Observable, of} from "rxjs";
 import {DataService} from "../../services/data.service";
 import {DialogService} from "../../services/dialog.service";
 import {BookingComponent} from "../booking/booking.component";
+import {HomeModel} from "../../models/home.model";
 
 @Component({
   selector: 'app-homes',
@@ -11,7 +12,7 @@ import {BookingComponent} from "../booking/booking.component";
 })
 export class HomesComponent implements OnInit {
 
-  homes$: Observable<any> | undefined;
+  homes$: Observable<HomeModel[]> | undefined;
 
   constructor(
     private dataService: DataService,
@@ -26,10 +27,12 @@ export class HomesComponent implements OnInit {
   /**
    * Ask the DialogService to open the Booking Dialog
    */
-  openDialog() {
+  openDialog(home: HomeModel) {
     this.dialogService.open(BookingComponent, {
       width: '40%',
-      data: {}
+      data: {
+        home
+      },
     });
   }
 }
