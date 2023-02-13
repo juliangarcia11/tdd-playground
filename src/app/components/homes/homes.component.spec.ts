@@ -5,6 +5,7 @@ import {of} from "rxjs";
 
 import { HomesComponent } from './homes.component';
 import {DataService} from "../../services/data.service";
+import {MockedHomes} from "../../models/homes.mock";
 
 describe('HomesComponent', () => {
   let component: HomesComponent;
@@ -27,21 +28,7 @@ describe('HomesComponent', () => {
   // before each test, get the data service and mock a return of data from the service
   beforeEach(() => {
     dataService = TestBed.get(DataService);
-    dataService.getHomes$.and.returnValue(of([
-      {
-        title: 'Home 1',
-        image: './favicon.ico',
-        location: 'new york'
-      },{
-        title: 'Home 2',
-        image: './favicon.ico',
-        location: 'boston'
-      },{
-        title: 'Home 3',
-        image: './favicon.ico',
-        location: 'chicago'
-      },
-    ]));
+    dataService.getHomes$.and.returnValue(of(MockedHomes));
 
     fixture.detectChanges();
   })

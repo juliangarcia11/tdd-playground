@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Home 1",
+    "image": "assets/cabin.jpg",
+    "location": "new york"
+  },
+  {
+    "title": "Home 2",
+    "image": "assets/cabin.jpg",
+    "location": "boston"
+  },
+  {
+    "title": "Home 3",
+    "image": "assets/cabin.jpg",
+    "location": "chicago"
+  }
+]
