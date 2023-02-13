@@ -52,4 +52,11 @@ describe('HomesComponent', () => {
     expect(item.querySelector('[data-test="image"]')).toBeTruthy();
 
   });
+
+  it('should show booking button', () => {
+
+    const item = fixture.nativeElement.querySelector('[data-test="home"]');
+    expect(item.querySelector('[data-test="book-btn"]')).toBeTruthy();
+
+  });
 });
