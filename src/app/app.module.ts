@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomesComponent } from './components/homes/homes.component';
 import { BookingComponent } from './components/booking/booking.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -23,13 +24,14 @@ import { BookingComponent } from './components/booking/booking.component';
     HeaderComponent,
     HomesComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

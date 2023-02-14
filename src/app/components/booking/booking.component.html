@@ -1,13 +1,17 @@
-<h1 data-test="title">{{ data.home.title }}</h1>
+<h1 data-test="title">Book: {{ data.home.title }}</h1>
 <div mat-dialog-content>
-  <div data-test="price-nightly">{{ data.home.price_nightly }}</div>
+  <div data-test="price-nightly">{{ data.home.price_nightly | currency }} per night</div>
 
   <div data-test="check-in-date">
-    <input type="date">
+    <input [(ngModel)]="checkIn">
   </div>
 
   <div data-test="check-out-date">
-    <input type="date">
+    <input [(ngModel)]="checkOut">
+  </div>
+
+  <div data-test="price-total">
+    Total: {{ calculateTotalPrice(checkIn, checkOut) | currency }}
   </div>
 </div>
 <!--<div mat-dialog-actions>-->
