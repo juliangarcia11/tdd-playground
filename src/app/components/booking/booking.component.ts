@@ -1,8 +1,9 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HomeModel} from "../../models/home.model";
 import * as moment from "moment";
 import {DataService} from "../../services/data.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-booking',
@@ -16,6 +17,8 @@ export class BookingComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { home: HomeModel },
+    public dialog: MatDialogRef<BookingComponent>,
+    private snackBar: MatSnackBar,
     private dataService: DataService
   ) { }
 
@@ -40,11 +43,15 @@ export class BookingComponent implements OnInit {
   }
 
   /**
-   * Ask the dataServices to book the stay defined by the current checkIn date, checkOut date, and total prices
+   * Ask the dataServices to book the stay defined by the current checkIn date, checkOut date, and total prices;
+   * When complete, close the dialog and display a success message to the user
    */
   bookStay() {
     this.dataService.bookHome$().subscribe(() => {
-      console.log('stay booked!!!');
+      this.dialog.close();
+      this.snackBar.open('Your stay has been booked!', undefined, {
+        duration: 2000
+      })
     });
   }
 }

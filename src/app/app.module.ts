@@ -12,6 +12,7 @@ import { BookingComponent } from './components/booking/booking.component';
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatDialogModule,
     FormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

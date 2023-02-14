@@ -2,26 +2,34 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BookingComponent} from './booking.component';
 import {MockedHomes} from "../../models/homes.mock";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HomeModel} from "../../models/home.model";
 import {FormsModule} from "@angular/forms";
 import {DataService} from "../../services/data.service";
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {of} from "rxjs";
-import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 
 
 describe('BookingComponent', () => {
-  // test based parameters
+  /**
+   * test based parameters
+   */
   let component: BookingComponent;
   let fixture: ComponentFixture<BookingComponent>;
   let dataService: jasmine.SpyObj<DataService>;
+  let matDialogService: jasmine.SpyObj<MatDialogRef<BookingComponent>>;
+  let matSnackBarService: jasmine.SpyObj<MatSnackBar>;
   let dialogData: { home: HomeModel };
 
-  // helper functions
+
+
+  /**
+   * helper functions
+   */
   const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   const elGrabber = (selector: string) => fixture.nativeElement.querySelector(selector);
   const selectDates = () => {
@@ -43,7 +51,11 @@ describe('BookingComponent', () => {
     fixture.detectChanges();
   }
 
-  // tests
+
+
+  /**
+   * before all tests
+   */
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -53,7 +65,9 @@ describe('BookingComponent', () => {
       declarations: [BookingComponent],
       providers: [
         {provide: DataService, useFactory: () => spyOnClass(DataService)},
-        {provide: MAT_DIALOG_DATA, useValue: {}}
+        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {provide: MatDialogRef, useFactory: () => spyOnClass(MatDialogRef)},
+        {provide: MatSnackBar, useFactory: () => spyOnClass(MatSnackBar)}
       ]
     })
       .compileComponents();
@@ -63,6 +77,8 @@ describe('BookingComponent', () => {
     fixture = TestBed.createComponent(BookingComponent);
     component = fixture.componentInstance;
     dataService = TestBed.get(DataService);
+    matDialogService = TestBed.get(MatDialogRef);
+    matSnackBarService = TestBed.get(MatSnackBar);
 
     // get the starting value for the dialog data
     dialogData = TestBed.get(MAT_DIALOG_DATA);
@@ -73,6 +89,7 @@ describe('BookingComponent', () => {
     // update the fixture to pull in mocked data
     fixture.detectChanges();
   })
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -127,4 +144,24 @@ describe('BookingComponent', () => {
     // Assert that the data service was used to create a booking
     expect(dataService.bookHome$).toHaveBeenCalled();
   });
+
+  it('should close the dialog and show notification after clicking the submit button', () => {
+    dataService.bookHome$.and.returnValue(of(null));
+
+    // select dates to be sent to the service
+    selectDates();
+
+    // Grab the button to click
+    const submitBtn = elGrabber('[data-test="submit-btn"] button');
+
+    // Click the button
+    submitBtn.click();
+
+    // Assert that the dialog service was used to close the booking dialog
+    expect(matDialogService.close).toHaveBeenCalled();
+
+    // Assert that a notification was shown
+    expect(matSnackBarService.open).toHaveBeenCalled();
+  });
+
 });
