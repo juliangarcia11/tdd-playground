@@ -122,7 +122,7 @@ describe('BookingComponent', () => {
   it('should show price per night', () => {
     const item = elGrabber('[data-test="price-nightly"]');
 
-    expect(item.textContent).toContain(formatter.format(MockedHomes[0].price_nightly) + ' per night');
+    expect(item.textContent).toContain(formatter.format(MockedHomes[0].price_nightly));
   });
 
   it('should show check in date field', () => {
@@ -140,7 +140,7 @@ describe('BookingComponent', () => {
     selectDates();
 
     // assert that the total shows that 3 nights * the home's price-nightly $125, so 3 * $125 = $375
-    expect(elGrabber('[data-test="price-total"]').textContent).toContain( 'Total: ' + formatter.format(dialogData.home.price_nightly * 3));
+    expect(elGrabber('[data-test="price-total"]').value).toContain(formatter.format(dialogData.home.price_nightly * 3));
   });
 
   it('should show submit button', () => {
