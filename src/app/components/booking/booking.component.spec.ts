@@ -32,6 +32,7 @@ describe('BookingComponent', () => {
 
 
 
+
   /**
    * helper functions
    */
@@ -61,6 +62,7 @@ describe('BookingComponent', () => {
       checkOutFieldValue: checkOutField.value,
     });
   }
+
 
 
 
@@ -107,6 +109,9 @@ describe('BookingComponent', () => {
     fixture.detectChanges();
   })
 
+
+
+
   /**
    * tests
    */
@@ -114,10 +119,12 @@ describe('BookingComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
   it('should show title', () => {
     const item = elGrabber('[data-test="title"]');
     expect(item.textContent).toContain('Book: ' + MockedHomes[0].title);
   });
+
 
   it('should show price per night', () => {
     const item = elGrabber('[data-test="price-nightly"]');
@@ -125,15 +132,24 @@ describe('BookingComponent', () => {
     expect(item.textContent).toContain(formatter.format(MockedHomes[0].price_nightly));
   });
 
+
   it('should show check in date field', () => {
     const item = elGrabber('[data-test="check-in-date"]');
     expect(item).toBeTruthy();
   });
 
+
   it('should show check out date field', () => {
     const item = elGrabber('[data-test="check-out-date"]');
     expect(item).toBeTruthy();
   });
+
+
+  it('should show total price to be \'--\' when no dates are selected', () => {
+    const item = elGrabber('[data-test="price-total"]');
+    expect(item.value).toContain('--');
+  });
+
 
   it('should show total price to be $375.00', () => {
     // select dates to calculate the total price for a stay
@@ -143,10 +159,12 @@ describe('BookingComponent', () => {
     expect(elGrabber('[data-test="price-total"]').value).toContain(formatter.format(dialogData.home.price_nightly * 3));
   });
 
+
   it('should show submit button', () => {
     const item = elGrabber('[data-test="submit-btn"] button');
     expect(item).toBeTruthy();
   });
+
 
   it('should book home after clicking the submit button', () => {
     dataService.bookHome$.and.returnValue(of(null));
@@ -163,6 +181,7 @@ describe('BookingComponent', () => {
     // Assert that the data service was used to create a booking
     expect(dataService.bookHome$).toHaveBeenCalled();
   });
+
 
   it('should close the dialog and show notification after clicking the submit button', () => {
     dataService.bookHome$.and.returnValue(of(null));
@@ -182,5 +201,4 @@ describe('BookingComponent', () => {
     // Assert that a notification was shown
     expect(matSnackBarService.open).toHaveBeenCalled();
   });
-
 });

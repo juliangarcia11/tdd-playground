@@ -30,7 +30,10 @@ export class BookingComponent implements OnInit {
    * @param checkIn   Date Defaults to today
    * @param checkOut  Date Defaults to today
    */
-  calculateTotalPrice(checkIn: Date = moment().toDate(), checkOut: Date = moment().toDate()): number {
+  calculateTotalPrice(checkIn?: Date, checkOut?: Date): number {
+    // verify both dates are set, else return 0 price
+    if (!checkIn || !checkOut) return 0;
+
     // create moment objects
     let checkInDate = moment(checkIn, 'MM-DD-YYYY');
     let checkOutDate = moment(checkOut, 'MM-DD-YYYY');
@@ -38,12 +41,8 @@ export class BookingComponent implements OnInit {
     // calculate how many nights between checkIn and checkOut
     let nights = checkOutDate.diff(checkInDate, 'days');
 
-    console.log('calculating total price', {
-      checkIn, checkOut, checkInDate, checkOutDate, nights
-    })
-
     // return the multiplied the number of nights by the price
-    return nights * this.data.home.price_nightly;
+    return nights > 0 ? nights * this.data.home.price_nightly : 0;
   }
 
   /**

@@ -29,7 +29,7 @@
     <mat-form-field appearance="outline" [color]="'accent'">
       <input matInput readonly disabled
              class="price-total" data-test="price-total"
-             [value]="calculateTotalPrice(checkIn, checkOut) | currency">
+             [value]="calculateTotalPrice(checkIn, checkOut) > 0 ? (calculateTotalPrice(checkIn, checkOut) | currency) : '--'">
       <mat-hint>Total</mat-hint>
     </mat-form-field>
   </div>
