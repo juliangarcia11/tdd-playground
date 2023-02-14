@@ -19,7 +19,12 @@
     </div>
 
     <div data-test="book-btn">
-      <button (click)="openDialog(home)">Book</button>
+      <button mat-icon-button
+              color="primary"
+              aria-label="Button that opens the booking dialog"
+              (click)="openDialog(home)">
+        <mat-icon aria-hidden="true" aria-label="date range icon" fontIcon="date_range"></mat-icon>
+      </button>
     </div>
 
   </div>

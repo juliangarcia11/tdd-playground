@@ -21,4 +21,12 @@ export class DataService {
       map((homes: any[]) => homes.map(h => new HomeModel(h)))
     );
   }
+
+  bookHome$(): Observable<any> {
+    // mocky:::
+    //    https://run.mocky.io/v3/cbe1cf4c-6e2d-4167-829a-dd3833a0bb4f
+    const url = 'https://run.mocky.io/v3/cbe1cf4c-6e2d-4167-829a-dd3833a0bb4f';
+    console.log('bookHome$ was called');
+    return this.httpClient.post(url,{});
+  }
 }

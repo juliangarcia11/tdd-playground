@@ -7,6 +7,8 @@ import { HomesComponent } from './homes.component';
 import {DataService} from "../../services/data.service";
 import {MockedHomes} from "../../models/homes.mock";
 import {DialogService} from "../../services/dialog.service";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 describe('HomesComponent', () => {
   let component: HomesComponent;
@@ -16,6 +18,10 @@ describe('HomesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        MatIconModule,
+        MatButtonModule
+      ],
       declarations: [ HomesComponent ],
       providers: [
         {provide: DataService, useFactory: () => spyOnClass(DataService)},

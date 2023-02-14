@@ -2,6 +2,7 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {HomeModel} from "../../models/home.model";
 import * as moment from "moment";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-booking',
@@ -14,7 +15,8 @@ export class BookingComponent implements OnInit {
   checkOut?: Date;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { home: HomeModel }
+    @Inject(MAT_DIALOG_DATA) public data: { home: HomeModel },
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void { }
@@ -35,5 +37,14 @@ export class BookingComponent implements OnInit {
 
     // return the multiplied the number of nights by the price
     return nights * this.data.home.price_nightly;
+  }
+
+  /**
+   * Ask the dataServices to book the stay defined by the current checkIn date, checkOut date, and total prices
+   */
+  bookStay() {
+    this.dataService.bookHome$().subscribe(() => {
+      console.log('stay booked!!!');
+    });
   }
 }
