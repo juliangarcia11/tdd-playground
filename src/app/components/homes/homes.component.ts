@@ -29,7 +29,7 @@ export class HomesComponent implements OnInit {
    */
   openDialog(home: HomeModel) {
     this.dialogService.open(BookingComponent, {
-      width: '40%',
+      width: '60%',
       data: {
         home
       },

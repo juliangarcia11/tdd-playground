@@ -13,6 +13,11 @@ import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatInputModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatMomentDateModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

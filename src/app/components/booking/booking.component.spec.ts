@@ -9,7 +9,12 @@ import {DataService} from "../../services/data.service";
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {of} from "rxjs";
 import {MatButtonModule} from "@angular/material/button";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -34,14 +39,14 @@ describe('BookingComponent', () => {
   const elGrabber = (selector: string) => fixture.nativeElement.querySelector(selector);
   const selectDates = () => {
     // get check in date field
-    const checkInField: HTMLInputElement = elGrabber('[data-test="check-in-date"] input');
+    const checkInField: HTMLInputElement = elGrabber('[data-test="check-in-date"]');
 
     // user enters check in date 12/20/19
     checkInField.value = '12/20/19';
     checkInField.dispatchEvent(new Event('input'));
 
     // get check out date field
-    const checkOutField: HTMLInputElement = elGrabber('[data-test="check-out-date"] input');
+    const checkOutField: HTMLInputElement = elGrabber('[data-test="check-out-date"]');
 
     // user enters check out date 12/23/19
     checkOutField.value = '12/23/19';
@@ -49,6 +54,12 @@ describe('BookingComponent', () => {
 
     // update feature component
     fixture.detectChanges();
+
+    console.log('selected dates', {
+      checkInField, checkOutField,
+      checkInFieldValue: checkInField.value,
+      checkOutFieldValue: checkOutField.value,
+    });
   }
 
 
@@ -59,8 +70,14 @@ describe('BookingComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        BrowserAnimationsModule,
         FormsModule,
-        MatButtonModule
+        MatButtonModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        MatMomentDateModule,
+        MatDatepickerModule
       ],
       declarations: [BookingComponent],
       providers: [
@@ -90,7 +107,9 @@ describe('BookingComponent', () => {
     fixture.detectChanges();
   })
 
-
+  /**
+   * tests
+   */
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -116,7 +135,7 @@ describe('BookingComponent', () => {
     expect(item).toBeTruthy();
   });
 
-  it('should show total price', () => {
+  it('should show total price to be $375.00', () => {
     // select dates to calculate the total price for a stay
     selectDates();
 

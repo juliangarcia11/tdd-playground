@@ -38,6 +38,10 @@ export class BookingComponent implements OnInit {
     // calculate how many nights between checkIn and checkOut
     let nights = checkOutDate.diff(checkInDate, 'days');
 
+    console.log('calculating total price', {
+      checkIn, checkOut, checkInDate, checkOutDate, nights
+    })
+
     // return the multiplied the number of nights by the price
     return nights * this.data.home.price_nightly;
   }
